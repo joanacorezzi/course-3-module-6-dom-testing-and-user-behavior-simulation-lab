@@ -1,15 +1,42 @@
-// Step 1: Simulate User Behavior
-// - Add event listeners for button clicks and form submissions.
-// - Use JavaScript to dynamically update the DOM based on user actions.
+//Simulate a click that will update the DOM
+ function simulateClick(elementId, message) {
+    const element = document.getElementById(elementId);
+    if (element) element.textContent = message;
+}
+//handle form submission and update DOM
+ function handleFormSubmit(formId, targetId) {
 
-// Step 2: DOM Manipulation Functions
-// - Implement functions to add, update, and remove DOM elements.
-// - Ensure all elements are dynamically created with appropriate attributes and content.
+const inputEl= document.getElementById('user-input');
+const content = document.getElementById(targetId);
+const error = document.getElementById("error-message");
+const input = (inputEl?.value || '').trim();
 
-// Step 3: Error Handling
-// - Display error messages in the DOM for invalid inputs or missing elements.
-// - Create reusable functions to handle common error cases.
-
-// Step 4: Reusable Utilities
-// - Create modular utility functions, such as createElement(tag, attributes).
-// - Ensure all functions follow DRY principles for maintainability.
+if(!input) {
+    if (error) {
+        error.textContent = 'Input cannot be empty';
+        error.classList.remove('hidden'); 
+    }
+} else {
+   if (content) content.textContent = input;
+   if (error) {
+    error.textContent = ''; // to clear the error
+    error.classList.add('hidden');
+   }
+    
+}
+}
+//test call
+function addElementToDOM(targetId, content){
+    const element = document.getElementById(targetId);
+    if (element) element.textContent = content;
+ }
+ function removeElementFromDOM(elementId) {
+    const element = document.getElementById(elementId);
+    if (element?.parentNode) element.parentNode.removeChild(element);
+ }
+module.exports = {
+    addElementToDOM,
+    removeElementFromDOM,
+    simulateClick,
+    handleFormSubmit,
+};
